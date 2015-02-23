@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ex3-1</title>
+</head>
+<body>
+<canvas id="canvas" width="800" height="800">
+You browser does not support HTML5 Canvas.
+</canvas>
+<script src="modernizr.js"></script>
+<script>
+  var canvas = document.querySelector('#canvas'),
+    context = null;
+    
+  if (Modernizr.canvas) {
+    
+    context = canvas.getContext('2d');
+    
+    var g1 = context.createRadialGradient(
+      160, // x of start
+      120, // y of start
+      0,   // radius of start
+      320, // x of end
+      220, // y of end
+      300);
+    //color stops can be any number between 0 and 1 inclusively
+    g1.addColorStop(0, '#ffffff'); 
+    g1.addColorStop(1, '#999999');
+    
+    context.lineWidth = 0;
+    context.strokeStyle = '#000000';
+    context.fillStyle = g1;
+    context.beginPath();
+    context.arc(
+      180, // x of start
+      180, // yo of start
+      160, // radius
+      0, // start angle
+      Math.PI *2, // end angle
+      true); //anticlockwise
+    context.fill();
+    
+    var g2 = context.createRadialGradient(
+      360, 320, 0, 260, 220, 200);
+    g2.addColorStop(0, '#ffffff'); 
+    g2.addColorStop(1, '#999999');
+    //inner circle
+    context.fillStyle = g2;
+    context.beginPath();
+    context.arc(180, 180, 130, 0, Math.PI*2, true);
+    context.fill();
+    
+    context.fillStyle = '#ffffff';
+    context.font = '280px Arial';
+    context.fillText('C', 80, 280);    
+  }
+</script>
+</body>
+</html>

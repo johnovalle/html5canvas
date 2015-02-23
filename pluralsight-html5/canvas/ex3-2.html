@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ex3-1</title>
+</head>
+<body>
+<canvas id="canvas" width="800" height="800">
+You browser does not support HTML5 Canvas.
+</canvas>
+<script src="modernizr.js"></script>
+<script>
+  var degreesToRadians = function(degrees) {
+    var radians = (degrees * (Math.PI / 180));
+    return radians;
+  }
+  var canvas = document.querySelector('#canvas'),
+    context = null;
+    
+  if (Modernizr.canvas) {
+    
+    context = canvas.getContext('2d');
+    
+    var img = new Image();
+    img.onload = function() {
+      context.drawImage(img, 0, 0);
+    }
+    img.src = 'lion.jpg';
+    
+    context.scale(.5, .5);
+    //context.scale(2,2);
+    //context.scale(.25,.5);
+    context.rotate(.2);
+    //context.rotate(degreesToRadians(-10));
+  }
+</script>
+</body>
+</html>

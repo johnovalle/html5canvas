@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ex3-5 ANIMATE</title>
+</head>
+<body>
+<canvas id="canvas" width="345" height="345">
+You browser does not support HTML5 Canvas.
+</canvas>
+<script src="modernizr.js"></script>
+<script>
+  var x = 0,
+      y = 0,
+      frame,
+      canvas = document.querySelector('#canvas'),
+      context = canvas.getContext('2d');
+  var draw = function() {
+    if(x <= canvas.width) {
+      context.clearRect(0, 0, 345, 345);
+      context.strokeStyle = 'rgb(139, 0, 0)';
+      context.lineWidth = 8;
+      context.beginPath();
+      context.moveTo(0, 0);
+      context.lineTo(x += 10, y += 10);
+      context.stroke();
+    }
+    else {
+      clearInterval(frame);
+      console.log('Animation Complete');
+    } 
+  }
+  if (Modernizr.canvas) {
+    frame = setInterval(function() {
+      draw();
+    }, 25);
+  }
+    
+  
+</script>
+</body>
+</html>

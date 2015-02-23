@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ex3-3 SAVE</title>
+</head>
+<body>
+<canvas id="canvas" width="800" height="800">
+You browser does not support HTML5 Canvas.
+</canvas>
+<script src="modernizr.js"></script>
+<script>
+  var canvas = document.querySelector('#canvas'),
+    context = null;
+    
+  if (Modernizr.canvas) {
+    
+    context = canvas.getContext('2d');
+    context.fillStyle = 'rgb(500,0,0)';
+    context.fillRect(
+      50,   // x
+      50,   // y
+      100,  // w
+      100); // h
+    
+    context.save();
+    context.translate(100, 100);
+    context.rotate(.5);
+    context.scale(.5, .5);
+    
+    context.fillStyle = 'rgba(0, 0, 500, 0.5)';
+    context.fillRect(
+      80,   // x
+      80,   // y
+      100,  // w
+      100); // h
+    
+    context.restore();
+    
+    context.fillStyle = 'rgba(0, 0, 500, 0.5)';
+    context.clearRect(
+      115,   // x
+      115,   // y
+      20,  // w
+      20); // h
+    
+    context.lineWidth = 6;
+    context.strokeStyle = 'rgb(51,153,0)';
+    context.strokeRect(115, 115, 20, 20);
+  }
+</script>
+</body>
+</html>

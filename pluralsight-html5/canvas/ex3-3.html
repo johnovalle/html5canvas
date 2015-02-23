@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ex3-3 TRANSLATE</title>
+</head>
+<body>
+<canvas id="canvas" width="800" height="800">
+You browser does not support HTML5 Canvas.
+</canvas>
+<script src="modernizr.js"></script>
+<script>
+  var degreesToRadians = function(degrees) {
+    var radians = (degrees * (Math.PI / 180));
+    return radians;
+  }
+  var canvas = document.querySelector('#canvas'),
+    context = null;
+    
+  if (Modernizr.canvas) {
+    
+    context = canvas.getContext('2d');
+    
+    context.translate(100,100);
+    
+    var text,
+        img = new Image();
+    img.onload = function() {
+      context.drawImage(img, 0, 0);
+      text = 'CONFIDENCE';
+    }
+    img.src = 'lion.jpg';
+    context.scale(.5, .5);
+    
+  }
+</script>
+</body>
+</html>
