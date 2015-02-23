@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ex2</title>
+</head>
+<body>
+<canvas id="canvas" width="500" height="300">
+You browser does not support HTML5 Canvas.
+</canvas>
+<script>
+	var canvas = document.getElementById('canvas'),
+		context = null;
+    
+  if (canvas && canvas.getContext) {
+    
+    context = canvas.getContext('2d');
+    context.beginPath();
+    context.moveTo(75, 50);
+    context.lineTo(75, 100);
+    context.lineTo(25, 100);
+    context.fill();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ex2-2</title>
+</head>
+<body>
+<canvas id="canvas" width="500" height="300">
+You browser does not support HTML5 Canvas.
+</canvas>
+<script src="modernizr.js"></script>
+<script>
+  var canvas = document.querySelector('#canvas'),
+    context = null;
+    
+  if (Modernizr.canvas) {
+    
+    context = canvas.getContext('2d');
+    context.beginPath();
+    context.moveTo(100, 100);
+    context.lineTo(100, 300);
+    context.lineTo(150, 300);
+    context.lineTo(150, 155);
+    context.lineTo(205, 155);
+    context.lineTo(205, 100);
+    context.closePath();
+    
+    context.fillStyle = '#0099ff';
+    context.fill();
+    
+    context.lineWidth = 6;
+    context.lineJoin = 'round';
+    context.strokeStyle = '#cccccc';
+    context.stroke();
+  }
+</script>
+</body>
+</html>
