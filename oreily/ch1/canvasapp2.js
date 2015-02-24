@@ -9,27 +9,37 @@ function canvasApp() {
 	if(!canvasSupport()) {
 		return;
 	}
+	var letterToGuess = ""; 
+	var higherOrLower = "";
+	var lettersGuessed = [];
 	var guesses = 0,
 			message = "Guess The LEtter from a (lower) to z (higher)",
 			letters = ["a","b","c","d","e","f","g","h","i","j","k",
 									"l","m","n","o","p","q","r","u","s","t","u",
 									"v","w","x","y","z"],
 			today = new Date(),
-			letterToGuess = "", 
-			higherOrLower = "", 
-			lettersGuessed,
+			
 			gameOver = false;
 	var theCanvas = document.getElementById("canvasOne");
 	var context = theCanvas.getContext("2d");
 	
 	function initGame() {
+		
 		var letterIndex = Math.floor(Math.random() * letters.length);
 		letterToGuess = letters[letterIndex];
 		window.addEventListener("keydown",eventKeyPressed, true);
 		
+		var formElement = document.getElementById('createImageData');
+		formElement.addEventListener('click', createImageDataPressed, false);
+		
 	}
 	
-	function keydown(e) {
+	function createImageDataPressed(e) {
+		window.open(theCanvas.toDataURL(), "canvasImage", "left=0,top=0,width=" +
+			theCanvas.width + ",height=" + theCanvas.height +",toolbar=0, resizable=0");
+	}
+	
+	function eventKeyPressed(e) {
 		if (!gameOver) {
 			var letterPressed = String.fromCharCode(e.keyCode);
 			letterPressed = letterPressed.toLowerCase();
