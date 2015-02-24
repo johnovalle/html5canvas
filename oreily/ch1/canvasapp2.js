@@ -55,25 +55,35 @@ function canvasApp() {
 	}
 
 	function drawScreen() {
-		//background
+		// Background
 		context.fillStyle = "#ffffaa";
 		context.fillRect(0, 0, 500, 300);
-		//text
-		context.fillStyle = "#000000";
-		context.font = "20px Sans-Serif"
-		context.textBaseline = "top";
-		context.fillText("Hello World!", 195, 80);
-		//image
-		var helloWorldImage = new Image();
-		helloWorldImage.onload = function () {
-			context.drawImage(helloWorldImage, 155, 110);
-		}
-		helloWorldImage.src = "helloworld.gif";
-
-		//box
+		//Box
 		context.strokeStyle = "#000000";
-		context.strokeRect(5, 5, 490, 290);
-
+		context.strokeRect(5, 5, 490, 490);
+		
+		context.textBaseline = "top";
+		//Date
+		context.fillStyle = "#000000";
+		context.font = "10px Sans-Serif";
+		context.fillText (today, 150, 10);
+		//message
+		context.fillStyle = "#ff0000";
+		context.font = "14px Sans-Serif";
+		context.fillText (message, 125, 30); //Guesses
+		context.fillStyle = "#109910";
+		context.font = "16px Sans-Serif";
+		context.fillText ('Guesses: ' + guesses, 215, 50);
+		//high or low
+		context.fillStyle = "#000000";
+		context.font = "16px Sans-Serif";
+		context.fillText ('Higher or Lower:' + lettersGuessed.toString(), 10, 260);
+		
+		if (gameOver) {
+			context.fillStyle = "#ff0000";
+			context.font = "40px Sans-Serif";
+			context.fillText ('You Got It!', 150, 180);
+		}
 
 
 	}
