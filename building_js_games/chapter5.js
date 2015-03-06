@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 var Game = {
   canvas: undefined,
   canvasContext: undefined,
@@ -51,10 +53,10 @@ Game.drawImage = function (sprite, position, rotation, origin) {
 Game.clearCanvas = function () {
   Game.canvasContext.clearRect(0, 0, Game.canvas.width, Game.canvas.height);
 };
-
 function handleMouseMove(evt) {
-  Game.balloonPosition = { x : evt.pageX, y : evt.pageY };
+  Game.mousePosition = { x : evt.pageX, y : evt.pageY };
 }
+
 document.onmousemove = handleMouseMove;
 Game.mainLoop = function () {
   
