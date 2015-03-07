@@ -88,6 +88,28 @@ function getSurrounding(sector, map) {
     }
   }
 }
+
+var base_chance = {
+    O: 50,
+    M: 10,
+    S: 10,
+    R: 10,
+    D: 10,
+    L: 10
+};
+function terrainPercent(blank, base, surrounding, percent) {
+    for(var i = 0; i<surrounding.length; i++){
+        if(surrounding[i] === blank || surrounding[i] === base){
+            
+        }
+        else{
+            percent[surrounding[i]] += 5;
+            percent[base] -= 5;
+        }
+    }
+    return percent;
+}
+
 var map = generateMap(10,10);
 fillMap();
 console.log(map);
