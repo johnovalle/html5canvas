@@ -18,6 +18,28 @@ var cannon = {
   cannonRotation: 0 
 };
 
+cannon.initialize = function() {
+  cannon.position = { x : 72, y : 405 };
+  cannon.colorPosition = { x : 55, y : 388 };
+  cannon.origin = { x : 34, y : 34 };
+  cannon.currentColor = sprites.cannon_red;
+  cannon.rotation = 0;
+};
+
+cannon.draw = function () {
+  Canvas2D.drawImage(sprites.cannon_barrel, cannon.position, cannon.rotation,
+  cannon.origin);
+  Canvas2D.drawImage(cannon.currentColor, cannon.colorPosition, 0,
+  { x : 0, y : 0 });
+};
+
+Game.draw = function () {
+  Canvas2D.clear();
+  Canvas2D.drawImage(sprites.background, { x : 0, y : 0 }, 0,
+  { x : 0, y : 0 });
+  cannon.draw();
+};
+
 var Mouse = {
   mousePosition: { x: 0, y: 0 }
 };
@@ -31,26 +53,14 @@ function handleKeyDown(evt) {
 function handleKeyUp(evt) {
   Keyboard.keyDown = -1;
 };
-document.onkeyup = handleKeyUp;
+
 Game.start = function () {
-  // Game.canvas = document.getElementById("myCanvas");
-  // Game.canvasContext = Game.canvas.getContext("2d");
-  // Game.backgroundSprite = new Image();
-  // Game.backgroundSprite.src = "spr_background.jpg";
-  // Game.cannonBarrelSprite = new Image();
-  // Game.cannonBarrelSprite.src = "spr_cannon_barrel.png";
-  // window.setTimeout(Game.mainLoop, 500);
-  var spriteFolder = "/assets/sprites/";
-  sprites.background = new Image();
-  sprites.background.src = spriteFolder + "spr_background.jpg"
-  sprites.cannon_barrel = new Image();
-  sprites.cannon_barrel.src = spriteFolder + "spr_cannon_barrel.png";
-  sprites.cannon_red = new Image();
-  sprites.cannon_red.src = spriteFolder + "spr_cannon_red.png";
-  sprites.cannon_green = new Image();
-  sprites.cannon_green.src = spriteFolder + "spr_cannon_green.png";
-  sprites.cannon_blue = new Image();
-  sprites.cannon_blue.src = spriteFolder + "spr_cannon_blue.png";
+  Canvas2D.initialize("myCanvas");
+  document.onkeydown = handleKeyDown;
+  document.onkeyup = handleKeyUp;
+  document.onmousemove = handleMouseMove;
+  cannon.initialize();
+  window.setTimeout(Game.mainLoop, 500);
 };
 
 document.addEventListener('DOMContentLoaded', Game.start);
