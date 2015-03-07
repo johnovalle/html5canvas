@@ -23,65 +23,67 @@ function fillMap() {
        var random_index = Math.floor(Math.random()*blank_sectors.length);
        var selected_sector = blank_sectors[random_index];
        blank_sectors.splice(random_index,1);
-       
-       //console.log(getSurrounding(map[selected_sector[0]][selected_sector[1]], map));
-       console.log(selected_sector);
-       map[selected_sector[0]][selected_sector[1]] = getTerrain();
+       var selection = {row: selected_sector[0], col: selected_sector[1]};
+       console.log(getSurrounding(selection, map));
+       //console.log(selection);
+       map[selection.row][selection.col] = getTerrain();
+       //console.log(map);
     }
 }
 
 function getSurrounding(sector, map) {
-  if (sector[0] === 0) {
-    if(sector[1] === 0) {
-      return [map[sector[0][sector[1]+1]],
-              map[sector[0]+1][sector[1]], map[sector[0]+1][sector[1]+1] 
+    console.log(sector);
+  if (sector.row === 0) {
+    if(sector.col === 0) {
+      return [map[sector.row][sector.col+1],
+              map[sector.row+1][sector.col], map[sector.row+1][sector.col+1] 
               ];
     }
-    else if (sector[1] === map[0].length) {
-      return [map[sector[0][sector[1]-1]],
-              map[sector[0]+1][sector[1]-1], map[sector[0]+1][sector[1]]
+    else if (sector.col === (map[0].length-1)) {
+      return [map[sector.row][sector.col-1],
+              map[sector.row+1][sector.col-1], map[sector.row+1][sector.col]
               ];
     }
     else {
-      return [map[sector[0][sector[1]-1]], map[sector[0][sector[1]+1]],
-              map[sector[0]+1][sector[1]-1], map[sector[0]+1][sector[1]], map[sector[0]+1][sector[1]+1] 
+      return [map[sector.row][sector.col-1], map[sector.row][sector.col+1],
+              map[sector.row+1][sector.col-1], map[sector.row+1][sector.col], map[sector.row+1][sector.col+1] 
               ];
     }
   }
-  else if (sector[0] === map.length) {
-    if(sector[1] === 0) {
-      return [map[sector[0]-1][sector[1]], map[sector[0]-1][sector[1]+1], 
-              map[sector[0][sector[1]+1]]
+  else if (sector.row === (map.length-1)) {
+    if(sector.col === 0) {
+      return [map[sector.row-1][sector.col], map[sector.row-1][sector.col+1], 
+              map[sector.row][sector.col+1]
               ];
     }
-    else if (sector[1] === map[0].length) {
-      return [map[sector[0]-1][sector[1]-1], map[sector[0]-1][sector[1]], 
-              map[sector[0][sector[1]-1]] 
+    else if (sector.col === (map[0].length-1)) {
+      return [map[sector.row-1][sector.col-1], map[sector.row-1][sector.col], 
+              map[sector.row][sector.col-1] 
               ];
     }
     else {
-      return [map[sector[0]-1][sector[1]-1], map[sector[0]-1][sector[1]], map[sector[0]-1][sector[1]+1], 
-              map[sector[0][sector[1]-1]], map[sector[0][sector[1]+1]]
+      return [map[sector.row-1][sector.col-1], map[sector.row-1][sector.col], map[sector.row-1][sector.col+1], 
+              map[sector.row][sector.col-1], map[sector.row][sector.col+1]
               ];
     }
   }
   else {
-    if(sector[1] === 0) {
-      return [map[sector[0]-1][sector[1]], map[sector[0]-1][sector[1]+1], 
-              map[sector[0][sector[1]+1]],
-              map[sector[0]+1][sector[1]], map[sector[0]+1][sector[1]+1] 
+    if(sector.col === 0) {
+      return [map[sector.row-1][sector.col], map[sector.row-1][sector.col+1], 
+              map[sector.row][sector.col+1],
+              map[sector.row+1][sector.col], map[sector.row+1][sector.col+1] 
               ];
     }
-    else if (sector[1] === map[0].length) {
-      return [map[sector[0]-1][sector[1]-1], map[sector[0]-1][sector[1]], 
-              map[sector[0][sector[1]-1]],
-              map[sector[0]+1][sector[1]-1], map[sector[0]+1][sector[1]] 
+    else if (sector.col === (map[0].length-1)) {
+      return [map[sector.row-1][sector.col-1], map[sector.row-1][sector.col], 
+              map[sector.row][sector.col-1],
+              map[sector.row+1][sector.col-1], map[sector.row+1][sector.col] 
               ];
     }
     else {
-      return [map[sector[0]-1][sector[1]-1], map[sector[0]-1][sector[1]], map[sector[0]-1][sector[1]+1], 
-              map[sector[0][sector[1]-1]], map[sector[0][sector[1]+1]],
-              map[sector[0]+1][sector[1]-1], map[sector[0]+1][sector[1]], map[sector[0]+1][sector[1]+1] 
+      return [map[sector.row-1][sector.col-1], map[sector.row-1][sector.col], map[sector.row-1][sector.col+1], 
+              map[sector.row][sector.col-1], map[sector.row][sector.col+1],
+              map[sector.row+1][sector.col-1], map[sector.row+1][sector.col], map[sector.row+1][sector.col+1] 
               ];
     }
   }
