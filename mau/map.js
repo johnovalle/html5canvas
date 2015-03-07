@@ -110,6 +110,21 @@ function terrainPercent(blank, base, surrounding, percent) {
     return percent;
 }
 
+function percentMapToArray(percent) {
+    var percentArray = [];
+    var current = 0;
+    for (var terrain in percent){
+        if (current > 0) {
+            percentArray.push({type: terrain, low: current + 1, high: percent[terrain] + current});
+        }
+        else{
+            percentArray.push({type: terrain, low: current, high: percent[terrain] + current});
+        }
+        current += percent[terrain];
+    }
+    return percentArray;
+}
+
 var map = generateMap(10,10);
 fillMap();
 console.log(map);
