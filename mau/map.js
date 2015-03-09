@@ -13,26 +13,45 @@ function generateMap(height,width){
 var blank_sectors = [];
 var terrain = ['O', 'M', 'S', 'R', 'D', 'L'];
 
-function getTerrain() {
-    var terrainType = Math.floor(Math.random()*terrain.length);
-    return terrain[terrainType];
+function getTerrain(calculated_chance) {
+    var terrainType = Math.floor(Math.random()*100);
+    //console.log(terrainType);
+   // console.log(calculated_chance);
+    for (var i = 0; i<calculated_chance.length; i++){
+        if (terrainType >= calculated_chance[i].low && terrainType <= calculated_chance[i].high){
+            return calculated_chance[i].type;
+        }
+    }
+    //return terrain[terrainType];
 }
 
 function fillMap() {
+    
     while (blank_sectors.length > 0){
+        var base_chance = {
+            O: 50,
+            M: 10,
+            S: 10,
+            R: 10,
+            D: 10,
+            L: 10
+        };
        var random_index = Math.floor(Math.random()*blank_sectors.length);
        var selected_sector = blank_sectors[random_index];
        blank_sectors.splice(random_index,1);
        var selection = {row: selected_sector[0], col: selected_sector[1]};
-       console.log(getSurrounding(selection, map));
+       //console.log(getSurrounding(selection, map));
        //console.log(selection);
-       map[selection.row][selection.col] = getTerrain();
+       var percentage = terrainPercent('BLANK', 'O', getSurrounding(selection, map), base_chance);
+       var percentage_map = percentMapToArray(percentage);
+       //console.log(percentage_map);
+       map[selection.row][selection.col] = getTerrain(percentage_map);
        //console.log(map);
     }
 }
 
 function getSurrounding(sector, map) {
-    console.log(sector);
+    //console.log(sector);
   if (sector.row === 0) {
     if(sector.col === 0) {
       return [map[sector.row][sector.col+1],
@@ -89,14 +108,7 @@ function getSurrounding(sector, map) {
   }
 }
 
-var base_chance = {
-    O: 50,
-    M: 10,
-    S: 10,
-    R: 10,
-    D: 10,
-    L: 10
-};
+
 function terrainPercent(blank, base, surrounding, percent) {
     for(var i = 0; i<surrounding.length; i++){
         if(surrounding[i] === blank || surrounding[i] === base){
@@ -107,6 +119,7 @@ function terrainPercent(blank, base, surrounding, percent) {
             percent[base] -= 5;
         }
     }
+   // console.log(percent);
     return percent;
 }
 
@@ -128,8 +141,3 @@ function percentMapToArray(percent) {
 var map = generateMap(10,10);
 fillMap();
 console.log(map);
-//generate blank map
-//get array
-//while array contains blanks fill in and pop coordinates
-//on fill do math to change chance based on surrounding tiles
-//and how many tiles of a type have been placed.
