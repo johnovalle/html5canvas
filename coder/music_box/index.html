@@ -2,6 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Music Box</title>
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
   <style>
     body {
       background-color: black;   
@@ -38,72 +39,72 @@
       background-color: #422018;
       border: 3px solid #f0421c;
     }
-    #c:hover {
-      background-color:#661920;
+    #d:hover {
+      background-color:#6e2819;
       cursor: pointer;
     }
-    #c:active {
-      background-color:#db1d2d;   
+    #d:active {
+      background-color:#f0421c;   
     }
 
     #e {
       background-color: #45391b;
       border: 3px solid #fec02d;
     }
-    #c:hover {
-      background-color:#661920;
+    #e:hover {
+      background-color:#735b20;
       cursor: pointer;
     }
-    #c:active {
-      background-color:#db1d2d;   
+    #e:active {
+      background-color:#fec02d;   
     }
 
     #f {
       background-color: #193c29;
       border: 3px solid #20d071;
     }
-    #c:hover {
-      background-color:#661920;
+    #f:hover {
+      background-color:#1b613b;
       cursor: pointer;
     }
-    #c:active {
-      background-color:#db1d2d;   
+    #f:active {
+      background-color:#20d071;   
     }
 
     #g {
       background-color: #18323e;
       border: 3px solid #1a9ddb;
     }
-    #c:hover {
-      background-color:#661920;
+    #g:hover {
+      background-color:#184d65;
       cursor: pointer;
     }
-    #c:active {
-      background-color:#db1d2d;   
+    #g:active {
+      background-color:#1a9ddb;   
     }
 
     #a {
       background-color: #331f35;
       border: 3px solid #a13fad;
     }
-    #c:hover {
-      background-color:#661920;
+    #a:hover {
+      background-color:#4e2753;
       cursor: pointer;
     }
-    #c:active {
-      background-color:#db1d2d;   
+    #a:active {
+      background-color:#a13fad;   
     } 
 
     #b {
       background-color: #43293d;
       border: 3px solid #f26fd4;
     }
-    #c:hover {
-      background-color:#661920;
+    #b:hover {
+      background-color:#6f3a62;
       cursor: pointer;
     }
-    #c:active {
-      background-color:#db1d2d;   
+    #b:active {
+      background-color:#f26fd4;   
     }
   </style>
 </head>
@@ -117,41 +118,80 @@
     <div id="a" class="box"></div>
     <div id="b" class="box"></div>
   </div>
-  <audio>
-    <source src="media/music_notes/a_note.mp3" type="audio/mpeg"></source>
-    <source src="media/music_notes/a_note.wav" type="audio/wav"></source>
-    <source src="media/music_notes/a_note.ogg" type="audio/ogg"></source>
-  </audio>
-  <audio>
-    <source src="media/music_notes/b_note.mp3" type="audio/mpeg"></source>
-    <source src="media/music_notes/b_note.wav" type="audio/wav"></source>
-    <source src="media/music_notes/b_note.ogg" type="audio/ogg"></source>
-  </audio>
-  <audio>
+  
+  <audio id="cAudio">
     <source src="media/music_notes/c_note.mp3" type="audio/mpeg"></source>
     <source src="media/music_notes/c_note.wav" type="audio/wav"></source>
     <source src="media/music_notes/c_note.ogg" type="audio/ogg"></source>
   </audio>
-  <audio>
+  <audio id="dAudio">
     <source src="media/music_notes/d_note.mp3" type="audio/mpeg"></source>
     <source src="media/music_notes/d_note.wav" type="audio/wav"></source>
     <source src="media/music_notes/d_note.ogg" type="audio/ogg"></source>
   </audio>
-  <audio>
+  <audio id="eAudio">
     <source src="media/music_notes/e_note.mp3" type="audio/mpeg"></source>
     <source src="media/music_notes/e_note.wav" type="audio/wav"></source>
     <source src="media/music_notes/e_note.ogg" type="audio/ogg"></source>
   </audio>
-  <audio>
+  <audio id="fAudio">
     <source src="media/music_notes/f_note.mp3" type="audio/mpeg"></source>
     <source src="media/music_notes/f_note.wav" type="audio/wav"></source>
     <source src="media/music_notes/f_note.ogg" type="audio/ogg"></source>
   </audio>
-  <audio>
+  <audio id="gAudio">
     <source src="media/music_notes/g_note.mp3" type="audio/mpeg"></source>
     <source src="media/music_notes/g_note.wav" type="audio/wav"></source>
     <source src="media/music_notes/g_note.ogg" type="audio/ogg"></source>
   </audio>
-  
+  <audio id="aAudio">
+    <source src="media/music_notes/a_note.mp3" type="audio/mpeg"></source>
+    <source src="media/music_notes/a_note.wav" type="audio/wav"></source>
+    <source src="media/music_notes/a_note.ogg" type="audio/ogg"></source>
+  </audio>
+  <audio id="bAudio">
+    <source src="media/music_notes/b_note.mp3" type="audio/mpeg"></source>
+    <source src="media/music_notes/b_note.wav" type="audio/wav"></source>
+    <source src="media/music_notes/b_note.ogg" type="audio/ogg"></source>
+  </audio>
+  <script>
+    var cNote = document.getElementById('cAudio');
+    var dNote = document.getElementById('dAudio');
+    var eNote = document.getElementById('eAudio');
+    var fNote = document.getElementById('fAudio');
+    var gNote = document.getElementById('gAudio');
+    var aNote = document.getElementById('aAudio');
+    var bNote = document.getElementById('bAudio');
+    
+    
+    $('#c').mouseover(function(){
+      cNote.currentTime = 0;
+      cNote.play();
+    });
+    $('#d').mouseover(function(){
+      dNote.currentTime = 0;
+      dNote.play();
+    });
+    $('#e').mouseover(function(){
+      eNote.currentTime = 0;
+      eNote.play();
+    });
+    $('#f').mouseover(function(){
+      fNote.currentTime = 0;
+      fNote.play();
+    });
+    $('#g').mouseover(function(){
+      gNote.currentTime = 0;
+      gNote.play();
+    });
+    $('#a').mouseover(function(){
+      aNote.currentTime = 0;
+      aNote.play();
+    });
+    $('#b').mouseover(function(){
+      bNote.currentTime = 0;
+      bNote.play();
+    });
+  </script>
 </body>
 </html>
